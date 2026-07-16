@@ -84,6 +84,43 @@
             </div>
         </div>
     </section>
+
+    <!-- FORMULARIO DE CONTACTO (LEADS) -->
+    <section id="contacto" class="py-20 bg-brand-dark text-white px-6">
+        <div class="max-w-xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-brand-accent font-semibold tracking-widest text-xs uppercase block mb-2">Contacto</span>
+                <h2 class="text-3xl md:text-4xl font-serif">Registra tu interés</h2>
+                <p class="text-gray-400 text-sm mt-2">Completa el formulario para que un asesor personalizado se comunique contigo.</p>
+            </div>
+            
+            <form id="leadForm" class="space-y-4 text-gray-800">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Nombre Completo</label>
+                    <input type="text" id="nombre" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Teléfono / WhatsApp</label>
+                    <input type="tel" id="telefono" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Correo Electrónico</label>
+                    <input type="email" id="email" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Mensaje o Consulta</label>
+                    <textarea id="mensaje" rows="4" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-brand-accent text-brand-dark font-bold py-3.5 rounded-lg hover:bg-white transition duration-300 text-sm uppercase tracking-wider">
+                    Enviar Registro
+                </button>
+            </form>
+            
+            <!-- Contenedor del estado del formulario (Crucial para que no falle el JS) -->
+            <p id="formStatus" class="mt-4 text-center text-sm font-semibold"></p>
+        </div>
+    </section>
     
     <!-- FOOTER -->
     <footer class="bg-black text-gray-500 py-12 px-6 border-t border-white/5">
@@ -109,7 +146,7 @@
         </svg>
     </a>
 
-    <!-- Tu archivo JS de conexión -->
+    <!-- Tu archivo JS de conexión (Se cargará perfectamente) -->
     <script src="conexion-supabase.js"></script>
 </body>
 </html>

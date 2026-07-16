@@ -2,8 +2,8 @@
 const SUPABASE_URL = "https://xqghmylbhrnbpskdoemn.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_f_LScv6Eg1irzPY0JPQJKw_NVGixlgj";
 
-// 2. Inicialización del Cliente Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 2. Inicialización con un nombre único para evitar choques
+const miSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 3. Captura del formulario y control de estado
 const form = document.getElementById('leadForm');
@@ -24,8 +24,8 @@ if (form) {
         const mensaje = document.getElementById('mensaje').value;
 
         try {
-            // Guardamos el lead apuntando exactamente a tu tabla "MCD Lotes"
-            const { data, error } = await supabase
+            // Guardamos el lead apuntando a tu tabla "MCD Lotes" usando la variable corregida
+            const { data, error } = await miSupabase
                 .from('MCD Lotes') 
                 .insert([
                     { 

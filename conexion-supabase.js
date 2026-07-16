@@ -1,8 +1,8 @@
-// 1. Configuración de Credenciales de Supabase
-const SUPABASE_URL = "https://eqpgpeubuhndyuybreca.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Emty_z6kOItvo_DKUC7OzA_tNbFShWe";
+// 1. Configuración de Credenciales Reales de Supabase (MCD Lotes)
+const SUPABASE_URL = "https://xqghmylbhrnbpskdoemn.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_f_LScv6Eg1irzPY0JPQJKw_NVGixlgj";
 
-// 2. Inicialización del Cliente Supabase (Corregido con la biblioteca global)
+// 2. Inicialización del Cliente Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 3. Captura del formulario y control de estado
@@ -23,7 +23,7 @@ if (form) {
         const mensaje = document.getElementById('mensaje').value;
 
         try {
-            // Guardamos el lead en la base de datos
+            // Guardamos el lead en la nueva tabla 'leads' de tu proyecto
             const { data, error } = await supabase
                 .from('leads')
                 .insert([

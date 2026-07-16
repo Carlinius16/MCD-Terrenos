@@ -1,49 +1,47 @@
-// 1. Configuración de Credenciales Reales de Supabase (MCD Lotes)
-const SUPABASE_URL = "https://xqghmylbhrnbpskdoemn.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_f_LScv6Eg1irzPY0JPQJKw_NVGixlgj";
+document.addEventListener("DOMContentLoaded", () => {
+    const flotante = document.getElementById("whatsapp-flotante");
+    const botonLargo = document.getElementById("btn-whatsapp-largo");
+    const elementsToReveal = document.querySelectorAll(".reveal");
 
-// 2. Inicialización del Cliente
-const miSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // 1. EFECTO DE DESAPARICIÓN DEL BOTÓN FLOTANTE
+    const handleFloatingWhatsapp = () => {
+        if (!flotante || !botonLargo) return;
 
-// 3. Captura del formulario y control de estado
-const form = document.getElementById('leadForm');
-const statusText = document.getElementById('formStatus');
+        // Obtenemos la posición en pantalla del botón alargado
+        const rect = botonLargo.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-if (form) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        statusText.innerText = "Enviando tus datos...";
-        statusText.className = "mt-4 text-sm font-semibold text-brand-accent";
-
-        const nombre = document.getElementById('nombre').value;
-        const telefono = document.getElementById('telefono').value;
-        const email = document.getElementById('email').value;
-        const mensaje = document.getElementById('mensaje').value;
-
-        try {
-            // Guardamos el lead apuntando a la nueva tabla limpia 'leads'
-            const { data, error } = await miSupabase
-                .from('leads') 
-                .insert([
-                    { 
-                        nombre: nombre, 
-                        telefono: telefono, 
-                        email: email, 
-                        mensaje: mensaje
-                    }
-                ]);
-
-            if (error) throw error;
-
-            statusText.innerText = "¡Excelente! Nos pondremos en contacto contigo muy pronto.";
-            statusText.className = "mt-4 text-sm font-semibold text-green-400";
-            form.reset();
-
-        } catch (error) {
-            console.error("Error al registrar el lead en Supabase:", error);
-            statusText.innerText = "Hubo un error al guardar tu solicitud. Intenta de nuevo o contáctanos por WhatsApp.";
-            statusText.className = "mt-4 text-sm font-semibold text-red-400";
+        // Si el botón largo de WhatsApp entra al visor (completamente o casi en pantalla), ocultamos el flotante
+        if (rect.top <= windowHeight && rect.bottom >= 0) {
+            flotante.classList.add("hidden-whatsapp");
+        } else {
+            flotante.classList.remove("hidden-whatsapp");
         }
-    });
-}
+    };
+
+    // 2. ANIMACIONES DE REVELACIÓN (SCROLL EFECTO TRANSICIÓN)
+    const handleScrollReveal = () => {
+        elementsToReveal.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const elementHeight = rect.height;
+            const windowHeight = window.innerHeight;
+
+            // Se activa cuando el elemento está un 15% visible en pantalla
+            if (rect.top < windowHeight - (elementHeight * 0.15) && rect.bottom > 0) {
+                el.classList.add("active");
+            }
+        });
+    };
+
+    // Controlador global de eventos de Scroll
+    const handleScrollEvents = () => {
+        handleFloatingWhatsapp();
+        handleScrollReveal();
+    };
+
+    // Escuchamos el scroll y ejecutamos los efectos
+    window.addEventListener("scroll", handleScrollEvents);
+    
+    // Ejecución inicial por si el usuario ya está a mitad de página al recargar
+    setTimeout(handleScrollEvents, 100);
+});

@@ -1,152 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCD Terrenos | Encuentra tu lote ideal</title>
-    <!-- Tailwind CSS (Framework base) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tu archivo CSS personalizado para fuentes y ajustes -->
-    <link rel="stylesheet" href="estilos.css">
-    <!-- Supabase JS Library (Requerida para la base de datos) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body class="bg-brand-light font-sans text-gray-800">
-
-    <!-- HEADER / MENU -->
-    <header class="fixed w-full top-0 z-50 bg-brand-dark/95 backdrop-blur-md text-white border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Enlace del Logo apuntando al inicio de tu web principal -->
-            <a href="https://carlinius16.github.io/MCD-Terrenos/" class="text-2xl font-serif font-bold tracking-wider text-brand-accent">MCD TERRENOS</a>
-            
-            <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
-                <a href="#inicio" class="hover:text-brand-accent transition">INICIO</a>
-                <a href="#proyecto" class="hover:text-brand-accent transition">EL PROYECTO</a>
-                <!-- Enlace de navegación del menú apuntando al repositorio del catálogo -->
-                <a href="https://carlinius16.github.io/MCD-Terrenos-Cat-logos/" class="text-brand-accent hover:underline transition">VER LOTES</a>
-                <a href="#contacto" class="hover:text-brand-accent transition">CONTACTO</a>
-            </nav>
-
-            <a href="https://wa.me/573219420775?text=Hola,%20estoy%20interesado%20en%20los%20terrenos%20de%20MCD%20Terrenos" 
-               target="_blank" 
-               class="bg-brand-accent hover:bg-brand-accent/90 text-brand-dark font-bold px-5 py-2 rounded-full text-xs tracking-wider transition">
-                 ¡COTIZAR YA!
-            </a>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section id="inicio" class="relative h-screen flex items-center justify-center bg-cover bg-center pt-20 hero-bg">
-        <div class="text-center px-6 max-w-3xl">
-            <span class="text-brand-accent font-bold tracking-widest text-xs uppercase block mb-3">Lanzamiento Exclusivo</span>
-            <h1 class="text-4xl md:text-6xl font-serif text-white mb-6 leading-tight">Tu lote ideal de <span class="italic text-brand-accent">6x12 metros</span> te espera</h1>
-            <p class="text-gray-300 text-lg md:text-xl mb-8 font-light">Invierte en tierra, asegura tu patrimonio con MCD Terrenos. Espacios planeados para el desarrollo de tus sueños.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <!-- Botón principal de acción apuntando al repositorio del catálogo -->
-                <a href="https://carlinius16.github.io/MCD-Terrenos-Cat-logos/" class="bg-brand-accent hover:bg-white text-brand-dark font-bold px-8 py-4 rounded-lg shadow-lg transition">Ver Planos y Medidas</a>
-                <a href="#contacto" class="border border-white hover:bg-white hover:text-brand-dark text-white font-bold px-8 py-4 rounded-lg transition">Registrar Interés</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- EL PROYECTO -->
-    <section id="proyecto" class="py-20 px-6 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <span class="text-brand-accent font-semibold tracking-widest text-xs uppercase">Características únicas</span>
-                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mt-2 mb-6">¿Por qué elegir MCD Terrenos?</h2>
-                <p class="text-gray-600 mb-6 leading-relaxed">MCD Terrenos nace como un proyecto de parcelación enfocado en brindar accesibilidad y alta valorización. Nuestros lotes estándar de <strong>6x12 metros (72 m²)</strong> están perfectamente optimizados para construcciones modernas, eficientes y con un diseño urbanístico de proyección.</p>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4">
-                        <span class="bg-brand-accent/20 text-brand-dark p-2 rounded-full font-bold">✓</span>
-                        <div>
-                            <h4 class="font-bold text-brand-dark">Medida ideal: 6m de frente x 12m de fondo</h4>
-                            <p class="text-sm text-gray-500">Aprovechamiento máximo del terreno para vivienda familiar.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <span class="bg-brand-accent/20 text-brand-dark p-2 rounded-full font-bold">✓</span>
-                        <div>
-                            <h4 class="font-bold text-brand-dark">Ubicación de alta valorización</h4>
-                            <p class="text-sm text-gray-500">Un sector con constante desarrollo que asegura tu inversión.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop" alt="Entorno del proyecto" class="rounded-xl shadow-2xl w-full h-[450px] object-cover">
-                <div class="absolute -bottom-6 -left-6 bg-brand-dark text-white p-6 rounded-lg shadow-xl hidden sm:block font-detail">
-                    <p class="text-3xl font-serif text-brand-accent font-bold">72m²</p>
-                    <p class="text-xs tracking-wider uppercase text-gray-400">Área total privada</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FORMULARIO DE CONTACTO (LEADS) -->
-    <section id="contacto" class="py-20 bg-brand-dark text-white px-6">
-        <div class="max-w-xl mx-auto">
-            <div class="text-center mb-10">
-                <span class="text-brand-accent font-semibold tracking-widest text-xs uppercase block mb-2">Contacto</span>
-                <h2 class="text-3xl md:text-4xl font-serif">Registra tu interés</h2>
-                <p class="text-gray-400 text-sm mt-2">Completa el formulario para que un asesor personalizado se comunique contigo.</p>
-            </div>
-            
-            <form id="leadForm" class="space-y-4 text-gray-800">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Nombre Completo</label>
-                    <input type="text" id="nombre" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Teléfono / WhatsApp</label>
-                    <input type="tel" id="telefono" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Correo Electrónico</label>
-                    <input type="email" id="email" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wide mb-1">Mensaje o Consulta</label>
-                    <textarea id="mensaje" rows="4" required class="w-full bg-white/10 border border-white/20 text-white rounded-lg p-3 text-sm focus:outline-none focus:border-brand-accent"></textarea>
-                </div>
-                
-                <button type="submit" class="w-full bg-brand-accent text-brand-dark font-bold py-3.5 rounded-lg hover:bg-white transition duration-300 text-sm uppercase tracking-wider">
-                    Enviar Registro
-                </button>
-            </form>
-            
-            <!-- Contenedor del estado del formulario (Crucial para que no falle el JS) -->
-            <p id="formStatus" class="mt-4 text-center text-sm font-semibold"></p>
-        </div>
-    </section>
+<!-- ================= HEADER / NAVEGACIÓN ================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-white/5 py-4 px-6 transition-all duration-300">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
     
-    <!-- FOOTER -->
-    <footer class="bg-black text-gray-500 py-12 px-6 border-t border-white/5">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <p class="text-white font-serif font-bold text-lg">MCD Terrenos</p>
-                <p class="text-sm mt-1">Tu futuro espacio, hoy.</p>
-            </div>
-            <div class="text-sm text-center md:text-right">
-                <p>Contacto Directo: <strong>+57 321 942 0775</strong></p>
-                <p class="mt-1">© 2026 MCD Terrenos. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
-    <a href="https://wa.me/573219420775?text=Hola,%20solicito%20asesoría%20sobre%20los%20lotes%20en%20MCD%20Terrenos" 
-       target="_blank" 
-       class="fixed bottom-6 right-6 bg-[#25D366] hover:scale-110 transition-transform text-white p-4 rounded-full shadow-2xl z-50 flex items-center justify-center"
-       title="Escríbenos por WhatsApp">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.49 5.362 1.491 5.482.002 9.944-4.461 9.947-9.948.002-2.657-1.029-5.153-2.903-7.03C17.18 1.78 14.685.751 12.013.751c-5.49 0-9.953 4.461-9.957 9.95 0 2.093.548 4.14 1.587 5.924l-.988 3.612 3.702-.971c1.7.923 3.354 1.392 4.69 1.392zm9.117-6.115c-.29-.145-1.716-.847-1.983-.944-.265-.097-.459-.145-.652.145-.194.29-.75.944-.919 1.139-.17.194-.339.218-.629.073-.29-.145-1.226-.452-2.336-1.442-.864-.771-1.447-1.723-1.617-2.014-.17-.29-.018-.447.127-.591.13-.13.29-.339.435-.509.145-.17.193-.29.29-.484.097-.194.048-.363-.024-.509-.073-.145-.652-1.573-.893-2.154-.236-.57-.475-.491-.652-.5h-.557c-.194 0-.508.073-.774.363-.266.29-1.015.992-1.015 2.42 0 1.428 1.04 2.81 1.185 3.003.145.194 2.045 3.123 4.956 4.38.692.299 1.233.478 1.656.612.696.22 1.329.189 1.83.114.558-.084 1.716-.702 1.958-1.38.242-.678.242-1.258.17-1.38-.072-.12-.266-.194-.557-.339z"/>
-        </svg>
+    <!-- Logo con enlace a la página principal -->
+    <a href="index.html" class="flex items-center gap-3 group">
+      <img src="https://i.pinimg.com/736x/57/51/4d/57514d11681640f9f2deb2bd662c0e4c.jpg" 
+           alt="MCD Terrenos Logo" 
+           class="h-12 w-auto rounded-full object-cover shadow-md border-2 border-brand-accent transition-transform duration-300 group-hover:scale-105">
+      <span class="text-lg font-bold tracking-wider text-brand-light hidden sm:inline transition-colors duration-300 group-hover:text-brand-accent">MCD TERRENOS</span>
     </a>
 
-    <!-- Tu archivo JS de conexión (Se cargará perfectamente) -->
-    <script src="conexion-supabase.js"></script>
-</body>
-</html>
+    <!-- Menú de Navegación -->
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+      <a href="index.html" class="text-brand-light hover:text-brand-accent transition-colors duration-300">INICIO</a>
+      <a href="index.html#proyecto" class="text-gray-300 hover:text-brand-accent transition-colors duration-300">EL PROYECTO</a>
+      <a href="index.html#contacto" class="text-gray-300 hover:text-brand-accent transition-colors duration-300">INFORMACIÓN</a>
+      
+      <!-- EL ENLACE AL CATÁLOGO (Con animación de línea inferior al pasar el mouse) -->
+      <a href="catalogo.html" class="relative text-brand-accent font-semibold hover:text-brand-light transition-colors duration-300 group py-1">
+        EXPLORAR LOTES
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </nav>
+
+    <!-- Botón de Acción Rápida -->
+    <div>
+      <a href="https://wa.me/573186986559" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="bg-brand-accent hover:bg-brand-light text-brand-dark font-bold px-5 py-2.5 rounded-full text-xs md:text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-lg hover:shadow-brand-accent/20">
+         ¡Cotizar Ya!
+      </a>
+    </div>
+
+  </div>
+</header>
+<!-- Espaciador para que el contenido no se meta debajo del header fijo -->
+<div class="h-20"></div>

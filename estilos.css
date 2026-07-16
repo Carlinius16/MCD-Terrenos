@@ -1,36 +1,24 @@
-/* Importación de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-
-/* Configuración de variables de color (Estilo Ciudad Cerritos) */
-:root {
-    --brand-dark: #112D1D;    /* Verde bosque profundo */
-    --brand-accent: #C5A880;  /* Dorado / Arena */
-    --brand-light: #F4F6F4;   /* Blanco grisáceo para fondos */
+/* --- ANIMACIONES DE SCROLL Y REVELACIÓN --- */
+.reveal {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Clases utilitarias personalizadas */
-.bg-brand-dark { background-color: var(--brand-dark); }
-.bg-brand-light { background-color: var(--brand-light); }
-.bg-brand-accent { background-color: var(--brand-accent); }
-.text-brand-accent { color: var(--brand-accent); }
-.text-brand-dark { color: var(--brand-dark); }
-.border-brand-accent { border-color: var(--brand-accent); }
-
-/* Tipografía */
-.font-serif {
-    font-family: 'Playfair Display', serif;
-}
-.font-sans {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
 }
 
-/* Efectos */
-html {
-    scroll-behavior: smooth;
-}
+/* Retardos de animación para efectos fluidos en cadena */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
 
-/* Fondo del Hero con gradiente integrado */
-.hero-bg {
-    background-image: linear-gradient(rgba(17, 45, 29, 0.75), rgba(17, 45, 29, 0.75)), 
-                      url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600&auto=format&fit=crop');
+/* Ocultar botón flotante de WhatsApp */
+#whatsapp-flotante.hidden-whatsapp {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
 }

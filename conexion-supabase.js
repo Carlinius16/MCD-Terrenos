@@ -1,47 +1,81 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const flotante = document.getElementById("whatsapp-flotante");
-    const botonLargo = document.getElementById("btn-whatsapp-largo");
-    const elementsToReveal = document.querySelectorAll(".reveal");
+document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. EFECTO DE DESAPARICIÓN DEL BOTÓN FLOTANTE
-    const handleFloatingWhatsapp = () => {
-        if (!flotante || !botonLargo) return;
+  /* ---------- Header al hacer scroll + barra de progreso ---------- */
+  const header = document.getElementById('header');
+  const progressBar = document.getElementById('progressBar');
+  const backToTop = document.getElementById('backToTop');
 
-        // Obtenemos la posición en pantalla del botón alargado
-        const rect = botonLargo.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  const onScroll = () => {
+    const scrollY = window.scrollY;
 
-        // Si el botón largo de WhatsApp entra al visor (completamente o casi en pantalla), ocultamos el flotante
-        if (rect.top <= windowHeight && rect.bottom >= 0) {
-            flotante.classList.add("hidden-whatsapp");
-        } else {
-            flotante.classList.remove("hidden-whatsapp");
-        }
+    header.classList.toggle('scrolled', scrollY > 40);
+    backToTop.classList.toggle('show', scrollY > 500);
+
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---------- Menú móvil ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    nav.classList.toggle('open');
+  });
+
+  nav.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      nav.classList.remove('open');
+    });
+  });
+
+  /* ---------- Animación de aparición al hacer scroll ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('is-visible'), i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  /* ---------- Contador animado de estadísticas ---------- */
+  const stats = document.querySelectorAll('.stat__num');
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
     };
+    requestAnimationFrame(step);
+  };
 
-    // 2. ANIMACIONES DE REVELACIÓN (SCROLL EFECTO TRANSICIÓN)
-    const handleScrollReveal = () => {
-        elementsToReveal.forEach((el) => {
-            const rect = el.getBoundingClientRect();
-            const elementHeight = rect.height;
-            const windowHeight = window.innerHeight;
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
 
-            // Se activa cuando el elemento está un 15% visible en pantalla
-            if (rect.top < windowHeight - (elementHeight * 0.15) && rect.bottom > 0) {
-                el.classList.add("active");
-            }
-        });
-    };
+  stats.forEach(el => statsObserver.observe(el));
 
-    // Controlador global de eventos de Scroll
-    const handleScrollEvents = () => {
-        handleFloatingWhatsapp();
-        handleScrollReveal();
-    };
-
-    // Escuchamos el scroll y ejecutamos los efectos
-    window.addEventListener("scroll", handleScrollEvents);
-    
-    // Ejecución inicial por si el usuario ya está a mitad de página al recargar
-    setTimeout(handleScrollEvents, 100);
 });

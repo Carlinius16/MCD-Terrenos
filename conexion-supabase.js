@@ -2,8 +2,8 @@
 const SUPABASE_URL = "https://eqpgpeubuhndyuybreca.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Emty_z6kOItvo_DKUC7OzA_tNbFShWe";
 
-// 2. Inicialización del Cliente Supabase
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 2. Inicialización del Cliente Supabase (Corregido con la biblioteca global)
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 3. Captura del formulario y control de estado
 const form = document.getElementById('leadForm');
@@ -31,8 +31,7 @@ if (form) {
                         nombre: nombre, 
                         telefono: telefono, 
                         email: email, 
-                        mensaje: mensaje,
-                        created_at: new Date()
+                        mensaje: mensaje
                     }
                 ]);
 

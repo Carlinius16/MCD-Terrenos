@@ -11,6 +11,7 @@ const statusText = document.getElementById('formStatus');
 
 if (form) {
     form.addEventListener('submit', async (e) => {
+        // Evitamos que la página se reinicie
         e.preventDefault();
         
         // Indicamos visualmente que se está procesando
@@ -23,9 +24,9 @@ if (form) {
         const mensaje = document.getElementById('mensaje').value;
 
         try {
-            // Guardamos el lead en la nueva tabla 'leads' de tu proyecto
+            // Guardamos el lead apuntando exactamente a tu tabla "MCD Lotes"
             const { data, error } = await supabase
-                .from('leads')
+                .from('MCD Lotes') 
                 .insert([
                     { 
                         nombre: nombre, 
